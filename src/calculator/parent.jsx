@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Details from "./Details";
+import Calculation from "./calculation";
 
-class Calculation extends Component {
+class Parent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,20 +12,35 @@ class Calculation extends Component {
       investment: this.props.investment,
       noYears: this.props.noYears,
       updatedInvestment: this.props.updatedInvestment,
+      annuityRate: this.props.annuityRate,
+      isSubmitted: false,
     };
   }
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state.updatedInvestment);
+    this.setState({ isSubmitted: true });
   };
 
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
+    this.setState({ isSubmitted: false });
   };
 
   render() {
-    return <Details onClick={this.handleSubmit} onChange={this.handleChange} />;
+    return (
+      <div>
+        <Details
+          onClick={this.handleSubmit}
+          onChange={this.handleChange}
+          values={this.state}
+        />
+        <Calculation
+          isSubmitted={this.state.isSubmitted}
+          values={this.state}
+        ></Calculation>
+      </div>
+    );
   }
 }
 
-export default Calculation;
+export default Parent;

@@ -1,8 +1,8 @@
 import React from "react";
-import Calculation from "./calculator/Calculation";
+import Parent from "./calculator/parent";
 
 const App = () => {
-  return <Calculation investment={5000} age={25} interest={12} lumpsum={50} noYears={0} updatedInvestment={0}/>;
+  return <Parent investment={5000} age={25} interest={12} lumpsum={50} noYears={0} updatedInvestment={0} annuityRate={10} />
 };
 
 export default App;
