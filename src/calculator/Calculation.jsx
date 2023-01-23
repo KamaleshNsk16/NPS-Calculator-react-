@@ -9,11 +9,13 @@ class Calculation extends Component {
       interest: this.props.interest,
       lumpsum: this.props.lumpsum,
       investment: this.props.investment,
+      noYears: this.props.noYears,
+      updatedInvestment: this.props.updatedInvestment,
     };
   }
   handleSubmit = (event) => {
     event.preventDefault();
-    
+    console.log(this.state.updatedInvestment);
   };
 
   handleChange = (event) => {

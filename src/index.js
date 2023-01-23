@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Details from './calculator/Details';
+import App from './app';
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
-const element = <Details />
+const element = <App />
 root.render(element)
