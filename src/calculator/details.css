@@ -5,8 +5,9 @@ input[type=number]{
 body{
     margin:50px 0px;
     padding: 0px;
-    text-align: center;
-    align:center;
+    /* text-align: center;
+    align:center; */
+    padding-left: 600px;
 }
 
 label,input{
