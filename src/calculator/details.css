@@ -27,6 +27,11 @@ br{
     clear:left;
 }
 
+.error{
+    color: red;
+    font-size: smaller;
+}
+
 
 .submit{
     background-color: green;

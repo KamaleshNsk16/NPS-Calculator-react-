@@ -6,13 +6,13 @@ class Parent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      age: this.props.age,
-      interest: this.props.interest,
-      lumpsum: this.props.lumpsum,
-      investment: this.props.investment,
-      noYears: this.props.noYears,
-      updatedInvestment: this.props.updatedInvestment,
-      annuityRate: this.props.annuityRate,
+      age: 25,
+      interest: 12,
+      lumpsum: 50,
+      investment: 5000,
+      noYears: 0,
+      updatedInvestment: 0,
+      annuityRate: 10,
       isSubmitted: false,
     };
   }
@@ -22,9 +22,12 @@ class Parent extends Component {
   };
 
   handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
-    this.setState({ isSubmitted: false });
+    this.setState({ [event.target.name]: event.target.value, isSubmitted:false });
   };
+
+  setValue = ()=>{
+    this.setState({lumpsum:80})
+  }
 
   render() {
     return (
@@ -33,6 +36,7 @@ class Parent extends Component {
           onClick={this.handleSubmit}
           onChange={this.handleChange}
           values={this.state}
+          setValue={this.setValue}
         />
         <Calculation
           isSubmitted={this.state.isSubmitted}

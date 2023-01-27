@@ -19,6 +19,7 @@ class Calculation extends Component {
     let annuity;
     let annuityAmount;
     let numberOfYears;
+    let defaultLumpsum=80;
     numberOfYears = noYears === 0 ? 60 - age : noYears;
 
     let totalMonths = 12;
@@ -33,7 +34,7 @@ class Calculation extends Component {
       years++;
     }
     lumpsumAmount = noYears
-      ? (principle * 80) / 100
+      ? (principle * defaultLumpsum) / 100
       : (principle * lumpsum) / 100;
     annuityAmount = principle-lumpsumAmount
     annuity = (annuityAmount/12)*(annuityRate/100)
