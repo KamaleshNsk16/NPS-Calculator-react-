@@ -1,44 +1,32 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 import "./details.css";
+import { useState } from "react";
+import { useEffect } from "react";
+import Calculation from "./calculation";
 
-class Details extends Component {
 
-  state={isCorrect:false}
+  let details = (props) =>{
+    let {age,noYears,investment,interest}=props.values
+    let [ageChk,setAge] = useState(true);
+    let [investmentChk,setInvestment]=useState(true);
+    let [interestChk,setInterest]=useState(true);
+    let [noYearsChk,setNoYears]=useState(true);
+    let [isMaturityBreak,setMaturityBreak] = useState(false);
 
-  setLumpsum = () => {
-    if(parseInt(this.props.values.noYears)===0){
-      return(<input
-              type="number"
-              name="lumpsum"
-              value={this.props.values.lumpsum}
-              min={20}
-              max={100}
-              onChange={(event) => {
-                this.props.onChange(event);
-              }}
-            />)
-    }
-    return(<input
-              type="number"
-              name="lumpsum"
-              value={80}
-              disabled
-            />)
-  };
+    useEffect(()=>{
+      setAge(!(age<18 || age>60));
+      setInterest(!(interest>15));
+      setInvestment(!(investment<1000));
+      setNoYears(noYears<42 || noYears<(60-parseInt(age))) ;
+      setMaturityBreak(!(parseInt(noYears)===0))
 
-  handleCheck = () =>{
-    let {noYears} = this.props.values;
-    if(noYears>42 || isNaN(noYears))  
-      return <span className="error"> Enter valid value </span>
-    return <span></span>
-  }
-
-  render() {
+    })
+    
     return (
       <Fragment> 
         <form
           onSubmit={(event) => {
-            this.props.onClick(event);
+            props.onClick(event);
           }}
         >
           <label>
@@ -46,14 +34,14 @@ class Details extends Component {
             <input
               type="number"
               name="investment"
-              value={this.props.values.investment}
+              value={props.values.investment}
               placeholder="Investment should greater than 1000"
               min={1000}
               onChange={(event) => {
-                this.props.onChange(event);
+                props.onChange(event);
               }}
               required
-            />
+            />{investmentChk?<span> </span>:<span className="error"> only above 1000</span>}
           </label>
           <br />
           <label>
@@ -61,15 +49,15 @@ class Details extends Component {
             <input
               type="number"
               name="age"
-              value={this.props.values.age}
+              value={props.values.age}
               placeholder="Age must be above 18"
               min={18}
               max={60}
               onChange={(event) => {
-                this.props.onChange(event);
+                props.onChange(event);
               }}
               required
-            />
+            />{ageChk?<span> </span>:<span className="error"> b/w 18 and 60</span>}
           </label>
           <br />
           <label>
@@ -77,14 +65,13 @@ class Details extends Component {
             <input
               type="number"
               name="noYears"
-              value={this.props.values.noYears}
+              value={props.values.noYears}
               min={0}
               max={40}
               onChange={(event) => {
-                this.props.onChange(event);
-                this.setLumpsum();
+                props.onChange(event);
               }}
-            />{this.handleCheck()}
+            />{noYearsChk?<span></span>:<span className="error"> provide valid value</span>}
           </label>
           <br />
           <label>
@@ -92,18 +79,33 @@ class Details extends Component {
             <input
               type="number"
               name="interest"
-              value={this.props.values.interest}
+              value={props.values.interest}
               min={5}
               max={15}
               onChange={(event) => {
-                this.props.onChange(event);
+                props.onChange(event);
               }}
               required
-            />
+            />{interestChk?<span> </span>:<span className="error"> only below 15%</span>}
           </label>
           <br />
           <label>Enter the Lumpsum percentage 
-            {this.setLumpsum()}
+            {isMaturityBreak?<input
+                type="number"
+                name="lumpsum"
+                value={80}
+                disabled
+              />:<input
+              type="number"
+              name="lumpsum"
+              value={props.values.lumpsum}
+              min={20}
+              max={100}
+              onChange={(event) => {
+                props.onChange(event);
+              }}
+            />
+            }
           </label>
           <br />
           <label>
@@ -111,9 +113,9 @@ class Details extends Component {
             <input
               type="number"
               name="updatedInvestment"
-              value={this.props.values.updatedInvestment}
+              value={props.values.updatedInvestment}
               onChange={(event) => {
-                this.props.onChange(event);
+                props.onChange(event);
               }}
             />
           </label>
@@ -123,20 +125,24 @@ class Details extends Component {
             <input
               type="number"
               name="annuityRate"
-              value={this.props.values.annuityRate}
+              value={props.values.annuityRate}
               min={5}
               max={10}
               onChange={(event) => {
-                this.props.onChange(event);
+                props.onChange(event);
               }}
             />
           </label>
           <br />
           <button className="submit">Submit</button>
         </form>
+        <Calculation
+        value={props} 
+        validations={[ageChk,investmentChk,interestChk,noYearsChk]}/>
       </Fragment>
+      
     );
   }
-}
 
-export default Details;
+
+export default details;

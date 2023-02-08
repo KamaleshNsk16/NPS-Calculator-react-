@@ -3,7 +3,7 @@ import React, { Component } from "react";
 class Calculation extends Component {
 
   getResult() {
-    let { age, investment, noYears, interest, lumpsum, annuityRate, updatedInvestment} = this.props.values;
+    let { age, investment, noYears, interest, lumpsum, annuityRate, updatedInvestment} = this.props.value.values
     age = parseInt(age);
     investment = parseInt(investment);
     noYears = parseInt(noYears);
@@ -61,10 +61,11 @@ class Calculation extends Component {
   }
 
   render() {
-    if (this.props.isSubmitted) {
+    const [ageChk,investmentChk,interestChk,noYearsChk]=this.props.validations;
+    if (ageChk&&investmentChk&&interestChk&&noYearsChk) {
       return this.getResult();
     }
-    return <p>Enter valid value</p>;
+    return <p>Enter valid values first</p>;
   }
 }
 export default Calculation;

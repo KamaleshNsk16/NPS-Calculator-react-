@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Details from "./Details";
-import Calculation from "./calculation";
 
 class Parent extends Component {
   constructor(props) {
@@ -13,16 +12,14 @@ class Parent extends Component {
       noYears: 0,
       updatedInvestment: 0,
       annuityRate: 10,
-      isSubmitted: false,
     };
   }
   handleSubmit = (event) => {
     event.preventDefault();
-    this.setState({ isSubmitted: true });
   };
 
   handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value, isSubmitted:false });
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   setValue = ()=>{
@@ -31,18 +28,12 @@ class Parent extends Component {
 
   render() {
     return (
-      <div>
         <Details
           onClick={this.handleSubmit}
           onChange={this.handleChange}
           values={this.state}
           setValue={this.setValue}
         />
-        <Calculation
-          isSubmitted={this.state.isSubmitted}
-          values={this.state}
-        ></Calculation>
-      </div>
     );
   }
 }

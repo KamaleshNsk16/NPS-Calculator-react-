@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "../../../../../../JS-Basics"
+		},
+		{
+			"path": "../../../../../../GitTrial"
+		},
+		{
+			"path": "../../../../.."
+		},
+		{
+			"path": "../../../../../../React-Clone"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "JS-Basics"
+	}
+}
